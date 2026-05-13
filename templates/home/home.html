@@ -1,0 +1,289 @@
+{% extends 'common_code/index.html' %}
+{% load static %}
+{% block title %}Warba Doors{% endblock title %}
+
+{% block content %}
+<!--::header part start::-->
+
+<!-- banner part start-->
+
+<section class="banner_part">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="banner_slider owl-carousel">
+                    
+
+<!--start dynamic slider-->
+
+                    {% for slid in slider %}
+                    <div class="single_banner_slider">
+                        
+                        <div class="row">
+                            <div class="banner_img d-none d-lg-block" style="width:705px; height: 352px;">
+                                <img src="{{slid.image.url}}" alt=""  style="width:100%; height: 100%;object-fit: cover;
+                                object-position: center; border-radius:10px;">
+                            </div>
+                            <div class="col-lg-5 col-md-8">
+                                <div class="banner_text">                
+                                    <div class="banner_text_iner">
+                                        <h1>{{slid.title}}</h1>
+                                        <p>
+                                            {{slid.short_description}}
+                                        </p>
+                                        {% comment %} <a href="#" class="btn_2"
+                                            >explore now</a
+                                        > {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+<!--End dynamic slider-->
+                     
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner part End-->
+
+<!-- feature_part start-->
+<section class="feature_part padding_top">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section_tittle text-center">
+                    <h2>Featured Category</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-between">
+<!--start dynamic Featured product show--> 
+            {% for feature in features1 %}
+            <div class="col-lg-7 col-sm-6">
+                <div class="single_feature_post_text"style="border-radius:8px;">
+                    <p>Premium Quality</p>
+                    <h3>Latest foam Sofa</h3>
+                    <a href="{% url 'single_product' feature.id %}" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                    <a href="{% url 'single_product' feature.id %}">
+                    <img src="{{feature.image.url}}" alt="" style=" border-radius:10px;"/>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+
+
+            {% for feature in features2 %}
+            <div class="col-lg-5 col-sm-6">
+                <div class="single_feature_post_text" style="border-radius:8px;">
+                    <p>Premium Quality</p>
+                    <h3>Latest foam Rack</h3>
+                   <a href="{% url 'single_product' feature.id %}" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                    <a href="{% url 'single_product' feature.id %}">
+                    <img src="{{feature.image.url}}" alt=""style=" border-radius:10px;" />
+                </div>
+            </div>
+            {% endfor %}
+            {% for feature in features3 %}
+            <div class="col-lg-5 col-sm-6">
+                <div class="single_feature_post_text" style="border-radius:8px;">
+                    <p>Premium Quality</p>
+                    <h3>Latest foam Wardrobe</h3>
+                    <a href="{% url 'single_product' feature.id %}" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                    <a href="{% url 'single_product' feature.id %}">
+                    <img src="{{feature.image.url}}" alt="" style=" border-radius:10px;" />
+                </div>
+            </div>
+            {% endfor %}
+            {% for feature in features4 %}
+            <div class="col-lg-7 col-sm-6">
+                <div class="single_feature_post_text"style="border-radius:8px;">
+                    <p>Premium Quality</p>
+                    <h3>Latest foam Bed</h3>
+                    <a href="{% url 'single_product' feature.id %}" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                    <a href="{% url 'single_product' feature.id %}">
+                    <img src="{{feature.image.url}}" alt="" style=" border-radius:10px;"/>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+<!--End dynamic Featured product show--> 
+        </div>
+    </div>
+</section>
+<!-- upcoming_event part start-->
+
+<!-- product_list start-->
+<section class="product_list section_padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="section_tittle text-center">
+                    <h2>awesome <span>shop</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="product_list_slider owl-carousel">
+                    <div class="single_product_list_slider">
+                        <div
+                        class="row align-items-center justify-content-between"
+                        >
+<!-- Start to awesome dynamic-->
+                        {% for product in  products1 %}
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="single_product_item" >
+                                    <a href="{% url 'single_product' product.id %}">
+                                        <div style="width: 270px;px; height: 287px;">
+                                    <img
+                                        src="{{product.image.url}}"
+                                        alt="" style="width:100%; height: 100%;object-fit: cover;
+                                        object-position: center; border-radius:10px;"
+                                    />
+                                        </div>
+                                    </a>
+                                    <div class="single_product_text">
+                                        <h4>{{product.name}}</h4>
+                                        <h3>${{product.price}}</h3>
+                                        {% if user.is_authenticated %}
+                                        <a href="{% url 'shopping:add_to_cart' pk=product.pk %}"  class='btn_2' style="padding:5px 8px;margin: right 3px; display:inline;gap:2px;">+ add to cart{% else %}
+                                            <a href="{% url 'logpage' %}"   class='btn_2' style="padding:5px 8px;margin: right 3px; display:inline;gap:2px;">+ add to cart
+                                            {% endif %} </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+<!-- End to awesome dynamic-->
+                        </div>
+                    </div>
+                    <div class="single_product_list_slider">
+                        <div
+                            class="row align-items-center justify-content-between"
+                        >
+                        {% for product in  products2 %}
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single_product_item" >
+                                <a href="{% url 'single_product' product.id %}">
+                                    <div style="width: 270px;px; height: 287px;">
+                                <img
+                                    src="{{product.image.url}}"
+                                    alt="" style="width:100%; height: 100%;object-fit: cover;
+                                    object-position: center; border-radius:10px;"
+                                />
+                                    </div>
+                                </a>
+                                <div class="single_product_text">
+                                    <h4>{{product.name}}</h4>
+                                    <h3>${{product.price}}</h3>
+                                    {% if user.is_authenticated %}
+                                        <a href="{% url 'shopping:add_to_cart' pk=product.pk %}"  class='btn_2' style="padding:5px 8px;margin: right 3px; display:inline;gap:2px;">+ add to cart
+                                            {% else %}
+                                            <a href="{% url 'logpage' %}"   class='btn_2' style="padding:5px 8px;margin: right 3px; display:inline;gap:2px;">+ add to cart
+                                            {% endif %} </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+<!-- End to awesome dynamic-->
+                    </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- product_list part end-->
+
+<!-- weekly sale start-->
+<section class="our_offer section_padding">
+    <div class="container">
+        {% for product in offer_product %}
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-6 col-md-6">
+                <div class="offer_img">
+                    <img style="width:500px;border-radius:10px;" src="{{product.image.url}}" alt="" />
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="offer_text">
+                    <h2>Weekly Sale on {{product.discount}}% Off This  Products</h2>
+                        <div class="input-group-append">
+                            <a
+                                href="{% url 'single_product' product.id %}"
+                                class="input-group-text btn_2"
+                                id="basic-addon2"
+                                >book now</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</section>
+<!-- weekly sale part end-->
+
+<!-- Best seller product_list part start-->{% comment %} 
+<section class="product_list best_seller section_padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="section_tittle text-center">
+                    <h2>Best Sellers <span>shop</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-12">
+                <div class="best_product_slider owl-carousel">
+                    <div class="single_product_item">
+                        <img src="{% static 'img/product/product_1.png' %}" alt="" />
+                        <div class="single_product_text">
+                            <h4>Quartz Belt Watch</h4>
+                            <h3>$150.00</h3>
+                        </div>
+                    </div>
+                    <div class="single_product_item">
+                        <img src="{% static 'img/product/product_2.png' %}" alt="" />
+                        <div class="single_product_text">
+                            <h4>Quartz Belt Watch</h4>
+                            <h3>$150.00</h3>
+                        </div>
+                    </div>
+                    <div class="single_product_item">
+                        <img src="{% static 'img/product/product_3.png' %}" alt="" />
+                        <div class="single_product_text">
+                            <h4>Quartz Belt Watch</h4>
+                            <h3>$150.00</h3>
+                        </div>
+                    </div>
+                    <div class="single_product_item">
+                        <img src="{% static 'img/product/product_4.png' %}" alt="" />
+                        <div class="single_product_text">
+                            <h4>Quartz Belt Watch</h4>
+                            <h3>$150.00</h3>
+                        </div>
+                    </div>
+                    <div class="single_product_item">
+                        <img src="{% static 'img/product/product_4.png' %}" alt="" />
+                        <div class="single_product_text">
+                            <h4>Quartz Belt Watch</h4>
+                            <h3>$150.00</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> {% endcomment %}
+<!-- Best seller product_list part end-->
+{% endblock content %}

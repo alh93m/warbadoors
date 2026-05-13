@@ -1,0 +1,36 @@
+# =============================================================================
+# WARBA DOORS — minimal production-oriented deps (PostgreSQL-only, CPython 3.10+ incl. 3.14+)
+# =============================================================================
+# MySQL drivers intentionally omitted (mysqlclient, PyMySQL). Use PostgreSQL in all envs.
+#
+# RISKY / COMPILED PACKAGES (read before deploy)
+# ----------------------------------------------
+# psycopg[binary] — psycopg3 with prebuilt wheels (bundled libpq) on common Windows/Linux
+#   targets. If PyPI has no wheel for your exact (platform, arch, CPython patch), pip may
+#   attempt a source build (uncommon on win_amd64 / manylinux_x86_64; more likely on niche
+#   combos). Mitigation: upgrade pip/setuptools/wheel; use a supported Python patch; or
+#   install OS libpq and use `psycopg[c]>=3.2,<4` instead of `[binary]` (smaller Linux images).
+# Pillow (>=12) — C extension; 12.x is the practical floor for reliable CPython 3.14 wheels.
+#   win_arm64 and very new 3.14 micro-releases can lag wheel uploads briefly.
+# reportlab — ships wheels for common platforms; optional extras (e.g. pycairo) can pull
+#   extra native libs — not declared here to keep installs simple.
+# =============================================================================
+
+# Django 5.2 LTS: >=5.2.8 documents Python 3.14 support; <6 avoids unpinned major upgrades.
+Django>=5.2.8,<6.0
+
+# DRF 3.15+ aligns with Django 5.x; upper bound avoids automatic 4.x API shifts.
+djangorestframework>=3.15.2,<4.0
+
+django-cors-headers>=4.6.0,<5.0
+
+python-decouple>=3.8,<4.0
+
+# Official PostgreSQL driver for Django’s `django.db.backends.postgresql` (psycopg v3).
+psycopg[binary]>=3.2.2,<4.0
+
+Pillow>=12.0.0,<13.0
+reportlab>=4.4.0,<5.0
+
+requests>=2.32.3,<3.0
+python-dateutil>=2.9.0,<3.0

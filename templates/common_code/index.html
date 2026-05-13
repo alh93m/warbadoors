@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+		<!-- Add meta tag and link -->
+		{% include 'common_code/meta_link.html' %}
+	<body>
+
+		<!-- Header code -->
+
+		{% include 'common_code/header.html' %}
+
+		<!-- Content write -->
+		{% block content %} <!--add Furniture website content --> {% endblock content %}
+
+		<!-- footer part-->
+		{% include 'common_code/footer.html' %}
+		
+		<!-- Js file -->
+		{% include 'common_code/script.html' %}
+
+	</body>
+</html>

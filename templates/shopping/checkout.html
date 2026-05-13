@@ -1,0 +1,128 @@
+{% extends 'common_code/index.html' %}
+{% comment %} {% load cart_product %} {% endcomment %}
+{% load static %}
+{% block title %}Warba Doors {% endblock title %}
+{% block content %}
+<section class="checkout_area padding_top">
+    <div class="container">
+      <div class="cupon_area">
+        <div class="check_title">
+          <h2>
+            Have a coupon?
+            <a href="#">Click here to enter your code</a>
+          </h2>
+        </div>
+        <input type="text" placeholder="Enter coupon code" />
+        <a class="tp_btn" href="#">Apply Coupon</a>
+      </div>
+      <div class="billing_details">
+        <div class="row">
+          
+          <form class="row contact_form" action="#" method="post">
+            {% csrf_token %}
+          <div class="col-lg-8">
+            <h3>Billing Details</h3>
+              <div class="col-md-6 col-lg-6 form-group p_star">
+                <input type="text" class="form-control"  name="first" required placeholder="First name"/>
+              </div>
+              <div class="col-md-6 col-lg-6 form-group p_star">
+                <input type="text" class="form-control"  name="last" required placeholder="Last name"/>
+                
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" placeholder="Phone number" name="number" required/>
+                
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="email" class="form-control" placeholder="Email Address" name="email" required/>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" placeholder="Address 1" name="add1" required/>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" placeholder="Address 2" name="add2" required/>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" placeholder="City" name="city" required/>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" placeholder="ZIP" name="zip" required/>
+              </div>
+            
+          </div>
+          <div class="col-lg-4">
+            <div class="order_box">
+              <h2>Your Order</h2>
+              <table class="order_table">
+                <tr id="order_tr">
+                  <th id="left">Product</th>
+                  <th id="mid">Quantity</th>
+                  <th id="right">Total</th>
+                </tr>
+                {% if request.user.is_authenticated %}
+                {% for cart in carts %}
+                <tr id="order_tr">
+                  
+                  <td id="left">{{cart.product.name}}</td>
+                  <td>x {{cart.quantity}}</td>
+                  <td id="right">{{cart.get_total}}</td>
+                  
+                </tr>
+                {% endfor %}
+                  {% endif %}
+                
+                
+                
+              </table>
+              <ul class="list list_2">
+                <li>
+                  <a href="#">Subtotal
+                    <span>{{ sub_total}}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Shipping
+                    <span>Flat rate: ${{delivery}}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Discount
+                    <span>${{ discount}}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Total
+                    <span>${{ total}}</span>
+                  </a>
+                </li>
+              </ul>
+              <br><br>
+              <div class="payment_item">
+                 
+                    <select class="country_select" name="payment" required>
+                      <option value="Card">Card</option>
+                      <option value="Cash On Delivery">Cash On Delivery</option>
+                      <option value="Bkash">Bkash</option>
+                    </select>
+                
+              </div>
+              
+              <br>
+              <br>
+              <br>
+              <div class="creat_account">
+                <input type="checkbox" id="f-option4" name="selector" required/>
+                <label for="f-option4">I’ve read and accept the </label>
+                <a href="#">terms & conditions*</a>
+              </div>
+              <button class="btn_3" href="{% url 'shopping:checkout'  %}">Proceed to Payment</button>
+              
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Checkout Area =================-->
+{% endblock content %}
