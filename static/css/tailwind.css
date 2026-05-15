@@ -1,0 +1,9 @@
+/* Tailwind input file. Developers should run the Tailwind CLI to compile.
+   Example: npx tailwindcss -i ./static/css/tailwind.css -o ./static/dist/tailwind.css --minify
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Minimal reusable utility for dark mode background */
+.dark body { background-color: #111827; }

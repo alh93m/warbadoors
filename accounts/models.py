@@ -5,15 +5,23 @@ from django.db import models
 class User(AbstractUser):
     """
     Custom User model with additional fields for Warba Doors.
-    Supports multiple roles: customer, admin, inventory_manager, sales_rep
+    Supports multiple roles used across the ERP. Keep choices stable to avoid
+    DB schema changes — only the `choices` list is extended for convenience.
     """
     
-    # Role choices
+    # Role choices (extendable). Do NOT rename existing values.
     ROLE_CHOICES = [
         ('customer', 'Customer'),
         ('admin', 'Administrator'),
         ('inventory_manager', 'Inventory Manager'),
         ('sales_rep', 'Sales Representative'),
+        ('sales_manager', 'Sales Manager'),
+        ('measurement_emp', 'Measurement Employee'),
+        ('installation_supervisor', 'Installation Supervisor'),
+        ('technician', 'Technician'),
+        ('warehouse_manager', 'Warehouse Manager'),
+        ('accountant', 'Accountant'),
+        ('customer_support', 'Customer Support'),
     ]
     
     # Profile fields
@@ -95,3 +103,24 @@ class User(AbstractUser):
     
     def is_sales_rep(self):
         return self.role == 'sales_rep'
+
+    def is_sales_manager(self) -> bool:
+        return self.role == 'sales_manager'
+
+    def is_measurement_employee(self) -> bool:
+        return self.role == 'measurement_emp'
+
+    def is_installation_supervisor(self) -> bool:
+        return self.role == 'installation_supervisor'
+
+    def is_technician(self) -> bool:
+        return self.role == 'technician'
+
+    def is_warehouse_manager(self) -> bool:
+        return self.role == 'warehouse_manager'
+
+    def is_accountant(self) -> bool:
+        return self.role == 'accountant'
+
+    def is_customer_support(self) -> bool:
+        return self.role == 'customer_support'

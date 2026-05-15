@@ -1,0 +1,14 @@
+{
+  "name": "warba-doors-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./static/css/tailwind.css -o ./static/dist/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./static/css/tailwind.css -o ./static/dist/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17",
+    "postcss": "^8.4.49",
+    "autoprefixer": "^10.4.20"
+  }
+}

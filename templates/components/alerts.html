@@ -1,0 +1,5 @@
+<div class="space-y-2">
+  {% for alert in alerts %}
+    <div class="p-3 rounded {{ alert.level_class }}">{{ alert.message }}</div>
+  {% endfor %}
+</div>
